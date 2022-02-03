@@ -34,7 +34,7 @@ exports.aceptarPedido = async (req, res) => {
         .then(function (response) {
         var valido = response.data;
         if(valido != undefined && valido.valido){
-            if(valido.type === 3){
+            if(valido.type === 2){
                 console.log("<ObtenerPedidosExitoso>Se retorno listado de pedidos");
                 //console.log(pedidos)
                 //console.log("----------")
@@ -44,7 +44,7 @@ exports.aceptarPedido = async (req, res) => {
                     axios
                     .post(`http://localhost:9001/cliente/recibirEstadoRP`,pedidos[i])
                     .then(response2=>{
-                        pedidos.push({id:body.id,pedido:body.pedido,entregadoR:false,recibidoR:false})
+                        pedidos.push({id:body.id,pedido:body.pedido,entregadoR:true,recibidoR:true})
                         res.send(response2.data)
                     })
                     //console.log(pedidos[i])
@@ -107,37 +107,24 @@ exports.entregado = async (req, res) => {
     .then(function (response) {
     var valido = response.data;
     if(valido != undefined && valido.valido){
-        if(valido.type === 1){
+        if(valido.type === 2){
             console.log("<EntregandoPedido>Marcando como entregado el pedido");
-            /*const payload = {
-                id:valido.user_id,
-                user:valido.user,
-                type:valido.type,
-                pedido:body.pedido,
-                estadoRT:body.estadoRT,
-                estadoRP:body.estadoRP
-            };
-            
-            const token2 = jwt.sign(payload, llave, {
-                expiresIn: 1440
-            });*/
-            if(valido.estadoRP){
-                console.log("<VerificandoPedido>Pedido ya entregado");
-                res.send({
-                    'status':200,
-                    'msj': "Pedido Ya entregado",
-                    'data': token
-                });
-            }else{
-                response.estadoRP = true;
-                console.log("<VerificandoPedido>Pedido siendo entregado");
-                res.send({
-                    'status':200,
-                    'msj': "Pedido aun no ha sido aceptado por restaurante",
-                    'data': token
-                });
+            for (i = 0; i < pedidos.length; i++) { 
+                if(pedidos[i].recibidoR && pedidos[i].entregadoR){
+                    res.send({
+                        'status':200,
+                        'msj': "Pedido Ya entregado",
+                        'data': []
+                    });
+                }else{
+                    console.log("<VerificandoPedido>Pedido siendo entregado");
+                    res.send({
+                        'status':200,
+                        'msj': "Pedido aun no ha sido entregado",
+                        'data': []
+                    });
+                }
             }
-            
         }else{
             console.log("<VerificacionFallido>Entrega invalida");
             res.send({

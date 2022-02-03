@@ -127,7 +127,7 @@ exports.verificarRestaurante  = async (req, res) => {
                         console.log("<VerificandoPedido>Pedido Ya aceptado por restaurante");
                         res.send({
                             'status':200,
-                            'msj': "Pedido Ya aceptado por restaurante",
+                            'msj': "Pedido Ya aceptado por restaurante, pedido esta en proceso",
                             'data': []
                         });
                     }else{
@@ -186,39 +186,31 @@ exports.verificarRepartidor = async (req, res) => {
         },
         data : data
     };
-
+    console.log(pedidos)
     axios(config)
     .then(function (response) {
     var valido = response.data;
     if(valido != undefined && valido.valido){
         if(valido.type === 1){
-            console.log("<VerificandoPedido>Verificando pedido de Restaurante");
-            /*const payload = {
-                id:valido.user_id,
-                user:valido.user,
-                type:valido.type,
-                pedido:body.pedido,
-                estadoRT:body.estadoRT,
-                estadoRP:body.estadoRP
-            };
-            
-            const token2 = jwt.sign(payload, llave, {
-                expiresIn: 1440
-            });*/
-            if(valido.estadoRT){
-                console.log("<VerificandoPedido>Pedido ya aceptado por repartidor");
-                res.send({
-                    'status':200,
-                    'msj': "Pedido Ya aceptado por restaurante",
-                    'data': token
-                });
-            }else{
-                console.log("<VerificandoPedido>Pedido aun no ha sido aceptado por restaurante");
-                res.send({
-                    'status':200,
-                    'msj': "Pedido aun no ha sido aceptado por restaurante",
-                    'data': token
-                });
+            console.log("<VerificandoPedido>Verificando pedido de Repartidor");
+            for (i = 0; i < pedidos.length; i++) {
+                if(valido.user_id==pedidos[i].id && pedidos[i].pedido==valido.pedido){
+                    if(pedidos[i].entregadoR){
+                        console.log("<VerificandoPedido>Pedido Ya aceptado por el Repartidor");
+                        res.send({
+                            'status':200,
+                            'msj': "Pedido Ya aceptado por el Repartidor, pedido ya en camino",
+                            'data': []
+                        });
+                    }else{
+                        console.log("<VerificandoPedido>Pedido aun no ha sido aceptado por el Repartidor");
+                        res.send({
+                            'status':200,
+                            'msj': "Pedido aun no ha sido aceptado por el Repartidor",
+                            'data': []
+                        });
+                    }
+                }
             }
             
         }else{
