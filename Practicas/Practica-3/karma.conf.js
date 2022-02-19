@@ -42,7 +42,7 @@ module.exports = function (config) {
     autoWatch: true,
     browserNoActivityTimeout: 30000,
     browsers: [
-      chromeHeadlessSupported ? 'ChromeHeadless' : 'Chrome'
+      chromeHeadlessSupported ? 'ChromeHeadless' : 'Chrome' //para que no abra el navegador
     ],
     customLaunchers: {
       ChromeHeadless: {
