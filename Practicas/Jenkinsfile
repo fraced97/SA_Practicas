@@ -22,13 +22,13 @@ pipeline {
       }
     }
 
-    stage('test') {
+    /*stage('test') {
       steps {
         dir('Practicas/Practica-3') {
           sh 'npm run test'
         }
       }
-    }
+    }*/
 
     stage('build') {
       steps {
