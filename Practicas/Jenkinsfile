@@ -25,7 +25,15 @@ pipeline {
     stage('test') {
       steps {
         dir('Practicas/Practica-4') {
-          sh 'npm run test'
+          sh 'ng test --no-watch --code-coverage'
+        }
+      }
+    }
+
+    stage('Sonar Scanner Coverage') {
+      steps {
+        dir('Practicas/Practica-4') {
+          sh 'npm run sonar'
         }
       }
     }
