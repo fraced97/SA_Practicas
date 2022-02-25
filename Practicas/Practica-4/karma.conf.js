@@ -41,7 +41,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browserNoActivityTimeout: 10000,
+    browserNoActivityTimeout: 30000,
     browsers: [
       chromeHeadlessSupported ? 'ChromeHeadless' : 'Chrome' //para que no abra el navegador
     ],
@@ -51,7 +51,7 @@ module.exports = function (config) {
           flags: ['--no-sandbox', '--headless', '--disable-gpu', '--remote-debugging-port=9222']
       }
     },
-    singleRun: false,
+    singleRun: true,
     restartOnFileChange: true
   });
 };
