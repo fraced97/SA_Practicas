@@ -16,7 +16,7 @@ pipeline {
     stage('install') {
       steps {
         git branch: 'main', url: 'https://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@github.com/fraced97/SA_Practicas.git'
-        dir('Practicas/Practica-4') {
+        dir('Practicas/Practica-3') {
           sh 'npm install'
         }
       }
@@ -24,24 +24,24 @@ pipeline {
 
     stage('test') {
       steps {
-        dir('Practicas/Practica-4') {
-          sh 'npm test'
-        }
-      }
-    }
-
-    stage('Sonar Scanner Coverage') {
-      steps {
-        dir('Practicas/Practica-4') {
-          sh 'npm run sonar'
+        dir('Practicas/Practica-3') {
+          sh 'npm run test'
         }
       }
     }
 
     stage('build') {
       steps {
-        dir('Practicas/Practica-4') {
-          
+        dir('Practicas/Practica-3') {
+          script {
+            try {
+              sh 'docker stop ${container_name}'
+              sh 'docker rm ${container_name}'
+              sh 'docker rmi ${image_name}:${tag_image}'
+            } catch (Exception e) {
+              echo 'Exception occurred: ' + e.toString()
+            }
+          }
           sh 'npm run build'
           sh 'docker build -t ${image_name}:${tag_image} .'
         }
