@@ -1,4 +1,4 @@
-- hosts: dev
+- hosts: produccion
   become: yes
   tasks:
   - name: "apt-get update"
