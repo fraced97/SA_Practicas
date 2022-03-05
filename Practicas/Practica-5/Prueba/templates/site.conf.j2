@@ -1,0 +1,9 @@
+server {
+  listen 8081;
+  listen [::]:8081;
+  server_name 34.125.150.43;
+  root /var/www/;
+  location / {
+    try_files $uri $uri/ =404;
+  }
+}

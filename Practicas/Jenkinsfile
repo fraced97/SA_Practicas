@@ -54,6 +54,9 @@ pipeline {
         sh 'ls'
         ansiblePlaybook credentialsId: 'keyssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'Practicas/Practica-5/Produccion/inventario.inv', playbook: 'Practicas/Practica-5/Produccion/nginx.yml'
         ansiblePlaybook credentialsId: 'keyssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'Practicas/Practica-5/Produccion/inventario.inv', playbook: 'Practicas/Practica-5/Produccion/sincronizar.yml'
+      
+        ansiblePlaybook credentialsId: 'keyssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'Practicas/Practica-5/Prueba/inventario.inv', playbook: 'Practicas/Practica-5/Prueba/nginx.yml'
+        ansiblePlaybook credentialsId: 'keyssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'Practicas/Practica-5/Prueba/inventario.inv', playbook: 'Practicas/Practica-5/Prueba/sincronizar.yml'
       }
     }
 
