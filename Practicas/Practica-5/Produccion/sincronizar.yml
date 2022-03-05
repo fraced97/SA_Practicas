@@ -2,7 +2,7 @@
   tasks:
   - name: "sync website"
     synchronize:
-      src: ./Practicas/Practica-3/dist/practica-3
+      src: ../Practica-3/dist/practica-3
       dest: /var/www/
       archive: no
       checksum: yes
