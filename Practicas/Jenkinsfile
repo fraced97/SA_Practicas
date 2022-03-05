@@ -48,6 +48,14 @@ pipeline {
       }
     }
 
+    stage('practica5') {
+      steps {
+        sh 'ansible --version'
+        ansiblePlaybook credentialsId: 'keyssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'Practica-5/Produccion/inventario.inv', playbook: 'Practica-5/Produccion/nginx.yml'
+        ansiblePlaybook credentialsId: 'keyssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'Practica-5/Produccion/inventario.inv', playbook: 'Practica-5/Produccion/sincronizar.yml'
+      }
+    }
+
     stage('deploy') {
       steps {
         sh 'docker run -d -p ${container_port}:80 --name ${container_name} ${image_name}:${tag_image}'
