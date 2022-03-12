@@ -48,7 +48,7 @@ pipeline {
       }
     }
 
-    stage('practica5') {
+    stage('practica-6') {
       steps {
         sh 'ansible --version'
         sh 'ls'
