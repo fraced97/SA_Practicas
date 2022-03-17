@@ -15,7 +15,7 @@ pipeline {
   stages {
     stage('install') {
       steps {
-        git branch: 'main', url: 'https://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@github.com/fraced97/SA_Practicas.git'
+        git branch: 'main', url: 'https://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@github.com/fraced97/SA_Practicas.git'
         dir('Practicas/Practica-3') {
           sh 'npm install'
         }
