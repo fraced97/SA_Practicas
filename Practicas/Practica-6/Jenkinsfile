@@ -48,16 +48,15 @@ pipeline {
       }
     }
 
-    stage('practica7') {
+    stage('practica5') {
       steps {
-          dir('Practica-6') {
-              sh 'terraform --version'
-              sh 'terraform init -reconfigure'
-              sh 'terraform validate'
-              sh 'terraform apply -input=false -auto-approve --destroy'
-              sh 'terraform plan -lock=false -aut "planfile"'
-              sh 'terraform apply -lock=false -input=false "planfile"'
-          }
+        sh 'ansible --version'
+        sh 'ls'
+        ansiblePlaybook credentialsId: 'keyssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'Practicas/Practica-5/Produccion/inventario.inv', playbook: 'Practicas/Practica-5/Produccion/nginx.yml'
+        ansiblePlaybook credentialsId: 'keyssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'Practicas/Practica-5/Produccion/inventario.inv', playbook: 'Practicas/Practica-5/Produccion/sincronizar.yml'
+      
+        ansiblePlaybook credentialsId: 'keyssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'Practicas/Practica-5/Prueba/inventario.inv', playbook: 'Practicas/Practica-5/Prueba/nginx.yml'
+        ansiblePlaybook credentialsId: 'keyssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'Practicas/Practica-5/Prueba/inventario.inv', playbook: 'Practicas/Practica-5/Prueba/sincronizar.yml'
       }
     }
 
