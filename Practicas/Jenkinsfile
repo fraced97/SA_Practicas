@@ -50,7 +50,7 @@ pipeline {
 
     stage('practica7') {
       steps {
-          dir('Practica-6') {
+          dir('Practica-7') {
               sh 'terraform --version'
               sh 'terraform init -reconfigure'
               sh 'terraform validate'
