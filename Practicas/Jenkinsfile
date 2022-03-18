@@ -52,11 +52,7 @@ pipeline {
       steps {
           sshagent(credentials: ['vmkey']){
             sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'terraform --version'"
-            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'terraform init -reconfigure'"
-            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'terraform apply -input=false -auto-approve --destroy'"
-            sh 'ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 "terraform plan -lock=false -out "planfile""'
-            sh 'ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 "terraform apply -lock=false -input=false "planfile""'
-            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'terraform --version'"
+            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'ls'"
           }
       }
     }
