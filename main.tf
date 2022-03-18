@@ -10,7 +10,7 @@ terraform {
 provider "docker" {}
 
 resource "docker_image" "practica7" {
-  name         = "fraced97/pareja6"
+  name         = "fraced97/pareja6:lts"
   keep_locally = false
 }
 
