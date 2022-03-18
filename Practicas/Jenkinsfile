@@ -51,20 +51,14 @@ pipeline {
     stage('practica7') {
       steps {
           sshagent(credentials: ['vmkey']){
-            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'terraform --version'"
-            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'ls'"
-            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'terraform init -reconfigure'"
-            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'terraform apply -input=false -auto-approve --destroy'"
-            sh 'ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 "terraform plan -lock=false -out "planfile""'
-            sh 'ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 "terraform apply -lock=false -input=false "planfile""'
-            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'terraform --version'"
+            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.224.232 'terraform --version'"
+            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.224.232 'ls'"
+            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.224.232 'terraform init -reconfigure'"
+            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.224.232 'terraform apply -input=false -auto-approve --destroy'"
+            sh 'ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.224.232 "terraform plan -lock=false -out "planfile""'
+            sh 'ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.224.232 "terraform apply -lock=false -input=false "planfile""'
+            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.224.232 'terraform --version'"
           }
-      }
-    }
-
-    stage('deploy') {
-      steps {
-        sh 'docker run -d -p ${container_port}:80 --name ${container_name} ${image_name}:${tag_image}'
       }
     }
   }
