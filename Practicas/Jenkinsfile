@@ -51,7 +51,7 @@ pipeline {
     stage('practica7') {
       steps {
           sshagent(credentials: ['vmkey']){
-            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'terraform --version'"
+            sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'terraform -v'"
             sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'ls'"
             sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'terraform init -reconfigure'"
             sh "ssh -o StrictHostKeyChecking=no -l pablorocad 34.125.9.93 'terraform apply -input=false -auto-approve --destroy'"
