@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: g6-back
-        image: gcr.io/valid-tuner-323400/g6-back
+        image: gcr.io/sacred-union-341805/g6-back
         ports:
         - containerPort: 9000
