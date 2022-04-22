@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: g6-back 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      role: g6-back
+  template:
+    metadata:
+      labels:
+        role: g6-back
+    spec:
+      containers:
+      - name: g6-back
+        image: gcr.io/valid-tuner-323400/g6-back
+        ports:
+        - containerPort: 9000
