@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: p6-back 
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       role: p6-back
