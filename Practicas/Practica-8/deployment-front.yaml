@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: p6-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: p6-front
+  minReadySeconds: 20
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate 
+  template: 
+     metadata:
+       labels:
+         role: p6-front
+     spec:
+       containers:
+       - image: gcr.io/sacred-union-341805/p6-front:v1
+         name: p6-front
+         ports:
+           - containerPort: 80

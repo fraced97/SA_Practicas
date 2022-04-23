@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: p6-back 
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      role: p6-back
+  template:
+    metadata:
+      labels:
+        role: p6-back
+    spec:
+      containers:
+      - name: p6-back
+        image: gcr.io/sacred-union-341805/p6-back
+        ports:
+        - containerPort: 9000
