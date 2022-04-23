@@ -10,7 +10,7 @@ export class ServiceService {
 
   }
   async getContador(){
-    return await this.http.get("http://localhost:9000/obtener")
+    return await this.http.get("http://35.184.121.13:9000/obtener")
   }
 
 }
